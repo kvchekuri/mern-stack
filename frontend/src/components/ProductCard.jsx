@@ -1,29 +1,70 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const cardStyle = {
-  width: "100%",
-  minHeight: "320px",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between"
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100%', 
+  minHeight: '450px'
 };
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onEdit, onDelete }) => {
+  const { title, image, description, price } = product;
+
   return (
-    <Card style={cardStyle} key={product.id}>
-      <Card.Img variant="top" src={product.banner} style={{ height: "160px", objectFit: "cover" }} />
-      <Card.Body className="d-flex flex-column justify-content-between">
-        <div>
-          <Card.Title>{product.name}</Card.Title>
-          <Card.Text>{product.description}</Card.Text>
-        </div>
-        <div className="d-flex justify-content-between align-items-center mt-3">
-          <span className="fw-bold text-primary">${product.price}</span>
-          <div className="d-flex gap-3">
-            <FaEdit role="button" className="text-success" title="Edit" />
-            <FaTrash role="button" className="text-danger" title="Delete" />
+    <Card style={cardStyle}>
+      <Card.Img 
+        variant="top" 
+        src={image} 
+        style={{ 
+          height: '200px', 
+          objectFit: 'contain', 
+          padding: '1rem',
+          backgroundColor: '#f8f9fa'
+        }} 
+        onError={(e) => {
+          e.target.src = 'https://via.placeholder.com/300x200?text=No+Image';
+        }}
+      />
+      <Card.Body className="d-flex flex-column">
+        <Card.Title 
+          className="mb-2" 
+          style={{
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            lineHeight: '1.4em',
+            maxHeight: '2.8em',
+          }}
+        >
+          {title}
+        </Card.Title>
+        <Card.Text 
+          className="text-muted flex-grow-1"
+          style={{
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            display: '-webkit-box',
+            WebkitLineClamp: 4,
+            WebkitBoxOrient: 'vertical',
+            lineHeight: '1.5em',
+            maxHeight: '6em'
+          }}
+        >
+          {description}
+        </Card.Text>
+        <div className="mt-auto d-flex justify-content-between align-items-center">
+          <Card.Text className="fw-bold mb-0">${price}</Card.Text>
+          <div>
+            <Button variant="outline-success" size="sm" className="me-2" onClick={() => onEdit(product)}>
+              <FaEdit />
+            </Button>
+            <Button variant="outline-danger" size="sm" onClick={() => onDelete(product)}>
+              <FaTrash />
+            </Button>
           </div>
         </div>
       </Card.Body>

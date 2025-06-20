@@ -1,4 +1,3 @@
-import Button from 'react-bootstrap/Button';
 import Header from './components/Header';
 import { useState } from "react";
 
@@ -10,6 +9,8 @@ import Home from './pages/Home/Home';
 import Products from './pages/Products/Products';
 import Contact from './pages/Contact/Contact';
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
       </Routes>
      </Router>
+     <ToastContainer position="top-right" autoClose={3000} />
     </>
   )
 }
