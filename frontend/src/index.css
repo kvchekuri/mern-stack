@@ -1,64 +1,61 @@
-.home-hero {
-  padding: 60px 0;
-}
 
-.home-hero h1 {
-  font-size: 3rem;
-}
-
-.home-hero img {
-  max-height: 400px;
-}
-
-.product-listing {
-  padding-bottom: 60px;
-}
-
-.card {
-  width: 100%;
-  height: 100%;
-}
-
-@media (max-width: 576px) {
-  .product-listing .col {
-    padding-left: 8px;
-    padding-right: 8px;
+/* Signup */
+.signup-container {
+    max-width: 400px;
+    margin: 4rem auto;
+    padding: 1rem;
   }
-}
-
-::selection {
-  background: #2563eb;
-  color: #fff;
-}
-
-.highlighted-text {
-  background: #2563eb;
-  color: #fff;
-  padding: 0 4px;
-  border-radius: 2px;
-}
-
-.home-hero {
-  padding: 60px 0;
-  min-height: 80vh;
-  background: linear-gradient(135deg, #2563eb 0%, #6a11cb 100%);
-  color: #fff;
-  display: flex;
-  align-items: center;
-}
-
-.home-hero h1,
-.home-hero p {
-  color: #fff;
-}
-
-.home-hero img {
-  max-height: 400px;
-}
-
-@media (max-width: 768px) {
-  .home-hero {
-    padding: 30px 0;
-    min-height: 60vh;
+  
+  .signup-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
-}
+  
+  .form-label {
+    font-weight: 500;
+  }
+  
+  .text-danger {
+    font-size: 0.875rem;
+  }
+  
+  /* Logo */
+  img.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  @media (max-width: 576px) {
+    .product-listing .col {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+  
+.product-image {
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .product-description {
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  
+  .product-card-body {
+    min-height: 200px;
+  }
+  
+  @media (max-width: 576px) {
+    .product-listing .col {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+  
