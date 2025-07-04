@@ -1,9 +1,5 @@
 import { toast } from "react-toastify";
-
-// Fetch
-export const FETCH_PRODUCTS_REQUEST = "FETCH_PRODUCTS_REQUEST";
-export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
-export const FETCH_PRODUCTS_FAILURE = "FETCH_PRODUCTS_FAILURE";
+import { FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS, FETCH_PRODUCTS_FAILURE } from "./actionTypes";
 
 // Create
 export const CREATE_PRODUCT_REQUEST = "CREATE_PRODUCT_REQUEST";
@@ -24,22 +20,35 @@ export const DELETE_PRODUCT_FAILURE = "DELETE_PRODUCT_FAILURE";
 export const fetchProducts = () => async (dispatch) => {
     dispatch({ type: FETCH_PRODUCTS_REQUEST });
     try {
-        const res = await fetch("http://localhost:5400/api/products");
+        const res = await fetch(
+            "https://mern-stack-6ua1.onrender.com/api/products",
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+
         const data = await res.json();
 
-        // console.log("products", data);
- 
+        if (!res.ok) {
+            throw new Error(data.message || "Failed to fetch products");
+        }
+
+        if (!Array.isArray(data)) {
+            throw new Error("Invalid data format: expected array");
+        }
+
         dispatch({ type: FETCH_PRODUCTS_SUCCESS, payload: data });
     } catch (err) {
         dispatch({ type: FETCH_PRODUCTS_FAILURE, payload: err.message });
-        toast.error("Failed to fetch product");
+        toast.error(err.message || "Something went wrong");
     }
 };
 
-  // CREATE product
+// CREATE product
 export const addProduct = (product) => async (dispatch) => {
-    // console.log("Product added", product);
-  
     dispatch({ type: CREATE_PRODUCT_REQUEST });
     try {
       const res = await fetch("http://localhost:5400/api/products", {
@@ -56,10 +65,8 @@ export const addProduct = (product) => async (dispatch) => {
     }
   };
 
-  // UPDATE product
+// UPDATE product
 export const updateProduct = (product) => async (dispatch) => {
-    console.log("Product updated", product);
-  
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
     try {
       const res = await fetch(`http://localhost:5400/api/products/${product.id}`, {
@@ -77,11 +84,8 @@ export const updateProduct = (product) => async (dispatch) => {
     }
   };
 
-
-  // DELETE product
+// DELETE product
 export const deleteProduct = (id) => async (dispatch) => {
-    console.log("Delete product", id);
-  
     dispatch({ type: DELETE_PRODUCT_REQUEST });
     try {
       await fetch(`http://localhost:5400/api/products/${id}`, {

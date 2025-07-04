@@ -21,12 +21,7 @@ export const createProduct = async (req, res) => {
 export const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find({})
-
-        res.status(200).json({
-            success: true,
-            message: "Products fetched successfully",
-            data: products
-        })
+        res.status(200).json(products);
     } catch (error) {
         console.log("Error fetching products", error.message);
         res.status(500).json({

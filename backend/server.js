@@ -8,7 +8,10 @@ import authRoutes from "./routes/auth.route.js"
 const app = express();
 const PORT = 5400;
 
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
 
 app.use(express.json());
 
@@ -26,5 +29,5 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
     connectDB();
-    console.log(`Server is running on http://localhost:5400`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });
