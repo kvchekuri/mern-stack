@@ -1,16 +1,12 @@
 import React from 'react';
-import Header from '../../components/Header';
 import Hero from '../../components/Hero';
-
+import './Home.css';
 
 const Home = () => {
   return (
-    <>
-    <section>
-        <Header />
-        <Hero />
-    </section>
-    </>
+    <div className="home-bg">
+      <Hero />
+    </div>
   );
 };
 

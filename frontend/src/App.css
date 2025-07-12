@@ -1,8 +1,15 @@
 .home-hero {
   padding: 80px 0;
-  background: linear-gradient(135deg, #4f46e5, #3b82f6); 
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
   color: #ffffff;
   min-height: 100vh;
+}
+
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 .home-hero h1 {

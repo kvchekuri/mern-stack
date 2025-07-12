@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../../components/Header';
+// import Header from '../../components/Header';
 import { EmptyComponent } from '../../components/Empty';
 import { Container, Row, Col, Card, Button, Modal, Spinner } from 'react-bootstrap';
 import ProductModal from './ProductModal';
@@ -51,7 +51,7 @@ const Products = () => {
 
   return (
     <section>
-      <Header />
+      {/* <Header /> */}
 
       <Container className="mt-4">
         <div className="d-flex justify-content-end mb-4">

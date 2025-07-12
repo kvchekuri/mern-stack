@@ -8,21 +8,25 @@ export const SIGNUP_REQUEST = "SIGNUP_REQUEST";
 export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
 export const SIGNUP_FAILURE = "SIGNUP_FAILURE";
 
+export const LOGOUT = "LOGOUT";
+
 // SIGNUP   
 export const signup = (values) => async (dispatch) => {
-    //console.log("User sign up..", values);
+    console.log("User sign up..", values);
     dispatch({ type: SIGNUP_REQUEST });
     try {
       const res = await fetch(
-        "https://mern-stack-6ua1.onrender.com/api/auth/register",
+        "https://mern-stack-6ua1.onrender.com/api/auth/register", // <-- updated to your deployed backend URL
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             name: values.name,
             email: values.email,
+            role: "customer",
             password: values.password,
           }),
+          credentials: "include",
         }
       );
   
@@ -47,7 +51,7 @@ export const signup = (values) => async (dispatch) => {
     dispatch({ type: LOGIN_REQUEST });
     try {
       const res = await fetch(
-        "https://mern-stack-6ua1.onrender.com/api/auth/login",
+        "https://mern-stack-6ua1.onrender.com/api/auth/login", // <-- updated to your deployed backend URL
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -75,4 +79,10 @@ export const signup = (values) => async (dispatch) => {
       toast.error(`${error.message}`);
     }
   };
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("token");
+  dispatch({ type: LOGOUT });
+  toast.success("Logged out successfully!");
+};
 

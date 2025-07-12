@@ -1,0 +1,40 @@
+.home-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #4f46e5, #3b82f6);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+/* Animated Login Button (outlined green) */
+.animated-login-btn {
+  background: #fff;
+  color: #198754;
+  border: 2px solid #198754;
+  transition: background 0.3s, color 0.3s;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 6px 24px;
+}
+.animated-login-btn:hover {
+  background: #198754;
+  color: #fff;
+}
+
+/* Animated Logout Button (outlined red, filled on scroll/hover) */
+.animated-logout-btn {
+  background: #fff;
+  color: #dc3545;
+  border: 2px solid #dc3545;
+  transition: background 0.3s, color 0.3s;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 6px 24px;
+}
+.animated-logout-btn.scrolled,
+.animated-logout-btn:hover {
+  background: #dc3545;
+  color: #fff;
+} 

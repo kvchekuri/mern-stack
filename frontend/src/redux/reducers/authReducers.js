@@ -7,6 +7,7 @@ import {
     SIGNUP_REQUEST,
     SIGNUP_SUCCESS,
     SIGNUP_FAILURE,
+    LOGOUT,
   } from "../actions/authActions.js";
   
   const initialState = {
@@ -28,6 +29,9 @@ import {
       case LOGIN_FAILURE:
       case SIGNUP_FAILURE:
         return { ...state, loading: false, error: action.payload };
+
+      case LOGOUT:
+        return { ...state, user: null };
   
       default:
         return state;

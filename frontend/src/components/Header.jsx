@@ -1,18 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
+  const isLoggedIn = !!localStorage.getItem('token');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
   return (
-    <Navbar bg="light" className="py-2">
-      <Container className="d-flex align-items-center">
-        <Navbar.Brand href="/" className="me-4">ProdManager</Navbar.Brand>
-        <Nav className="d-flex flex-row">
-          <Nav.Link href="/" className="me-3">Home</Nav.Link>
-          <Nav.Link href="/products" className="me-3">Products</Nav.Link>
-          <Nav.Link href="/contact">Contact</Nav.Link>
-        </Nav>
+    <Navbar expand="lg" className="bg-body-tertiary">
+      <Container>
+        <Navbar.Brand href="/">ProdManager</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mx-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/products">Products</Nav.Link>
+            <Nav.Link href="/contact">Contact</Nav.Link>
+          </Nav>
+          {isLoggedIn ? (
+            <Button variant={scrolled ? 'danger' : 'outline-danger'} onClick={handleLogout}>
+              Logout
+            </Button>
+          ) : (
+            <Nav.Link href="/login">
+              <Button variant={scrolled ? 'success' : 'outline-success'}>
+                Login
+              </Button>
+            </Nav.Link>
+          )}
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
